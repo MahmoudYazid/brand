@@ -21,17 +21,66 @@ class viewModel @Inject constructor(
    val ApiserviceInst: apiServiceImplement
 
 ):ViewModel() {
+   val ProductDataViewModel = MutableLiveData<List<ResponseItem>>()
+   val ProductDataViewModelLiveData: LiveData<List<ResponseItem>> = ProductDataViewModel
 
-   suspend fun GetAllData(): List<ResponseItem> {
+   val CatigoryDataViewModel = MutableLiveData<List<String>>()
+   val CatigoryDataViewModelLiveData: LiveData<List<String>> = CatigoryDataViewModel
+
+   val limitProductShowViewModel = MutableLiveData<Int>(10)
+   val LimitProductDataViewModel = MutableLiveData<List<ResponseItem>?>()
+   val LimitProductDataViewModelLiveData: MutableLiveData<List<ResponseItem>?> = LimitProductDataViewModel
 
 
-      return ApiserviceInst.GetAllProductData()
+   fun incLimit(){
+      limitProductShowViewModel.value= limitProductShowViewModel.value?.plus(5);
+
+
+   }
+   fun LimitGetData() {
+
+      viewModelScope.launch {
+         val newProductData = limitProductShowViewModel.value?.let {
+            ApiserviceInst.GetAllProductDataWithLimit(
+               it
+            )
+         }
+         withContext(Dispatchers.Main){
+            LimitProductDataViewModel.value=newProductData
+         }
+      }
+
+
+
+
+   }
+   fun GetAllData() {
+
+      viewModelScope.launch {
+         val newProductData = ApiserviceInst.GetAllProductData()
+         withContext(Dispatchers.Main){
+            ProductDataViewModel.value=newProductData
+         }
+      }
+
 
 
 
    }
 
+   fun GetCatigoriesData() {
 
+      viewModelScope.launch {
+         val newProductData = ApiserviceInst.GetAllCatigories()
+         withContext(Dispatchers.Main){
+            CatigoryDataViewModel.value=newProductData
+         }
+      }
+
+
+
+
+   }
 
 
 }

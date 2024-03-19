@@ -13,4 +13,16 @@ class apiServiceImplement()  {
         return data
 
     }
+
+    suspend fun GetAllCatigories(): List<String> {
+        val data = ProductsApi.retrofitService.getCatigories()
+        return data
+
+    }
+    suspend fun GetAllProductDataWithLimit(LimitInput:Int): List<ResponseItem> {
+        val data = ProductsApi.retrofitService.getproductsWithLimit(LimitInput)
+        return data
+
+    }
+
 }

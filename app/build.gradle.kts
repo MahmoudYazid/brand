@@ -99,6 +99,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation ("androidx.activity:activity-ktx:1.3.1")
 
+    // observe as state
+    implementation ("androidx.compose.runtime:runtime-livedata:1.0.0-beta01")
+
+    // coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    // flow layout
+    implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")
+
 
 }
 kapt {

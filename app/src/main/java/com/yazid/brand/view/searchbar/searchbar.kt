@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -61,11 +62,15 @@ fun SearchBarComp(){
                 mutableStateOf("")
             }
             TextField(
-                value =TempText ,
+                value = TempText,
+                label = {
+                    Text(text = "search")
+                },
 
-                onValueChange ={
-                    TempText=it
-                } ,
+
+                onValueChange = {
+                    TempText = it
+                },
 
                 leadingIcon = {
                     IconButton(onClick = { /*TODO*/ }) {
@@ -79,20 +84,18 @@ fun SearchBarComp(){
 
                 },
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .border(
-                            2.dp,
-                            Color(0xFFDEE2E7),
-                            shape = RoundedCornerShape(10.dp))
-                        ,
+                Modifier
+                    .fillMaxSize()
+                    .border(
+                        2.dp,
+                        Color(0xFFDEE2E7),
+                        shape = RoundedCornerShape(10.dp)
+                    ),
                 colors = TextFieldDefaults.textFieldColors(
 
                     unfocusedIndicatorColor = Color.Transparent,
-                    containerColor = Color.White),
-
-
-
+                    containerColor = Color.White
+                ),
 
 
                 )
