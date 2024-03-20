@@ -92,6 +92,7 @@ dependencies {
 
     // ViewModel
     val lifecycle_version = "2.7.0"
+    implementation ("androidx.compose.runtime:runtime-livedata:1.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
@@ -100,12 +101,18 @@ dependencies {
     implementation ("androidx.activity:activity-ktx:1.3.1")
 
     // observe as state
-    implementation ("androidx.compose.runtime:runtime-livedata:1.0.0-beta01")
 
     // coil
     implementation("io.coil-kt:coil-compose:2.6.0")
     // flow layout
     implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")
+    // activityViewModel
+
+    val fragment_version = "1.4.0"
+
+
+    implementation ("androidx.fragment:fragment-ktx:$fragment_version")
+
 
 
 }

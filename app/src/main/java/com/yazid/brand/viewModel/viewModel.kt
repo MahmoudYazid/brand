@@ -1,5 +1,7 @@
 package com.yazid.brand.viewModel
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,18 +9,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yazid.brand.Repository.onlineResourse.apiServiceImplement
 import com.yazid.brand.model.ResponseItem
+import com.yazid.brand.view.CategoryActivity
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @HiltViewModel
 class viewModel @Inject constructor(
-   val ApiserviceInst: apiServiceImplement
+   val ApiserviceInst: apiServiceImplement,
+   @ApplicationContext val context: Context
 
 ):ViewModel() {
    val ProductDataViewModel = MutableLiveData<List<ResponseItem>>()
@@ -27,28 +34,18 @@ class viewModel @Inject constructor(
    val CatigoryDataViewModel = MutableLiveData<List<String>>()
    val CatigoryDataViewModelLiveData: LiveData<List<String>> = CatigoryDataViewModel
 
-   val limitProductShowViewModel = MutableLiveData<Int>(10)
-   val LimitProductDataViewModel = MutableLiveData<List<ResponseItem>?>()
-   val LimitProductDataViewModelLiveData: MutableLiveData<List<ResponseItem>?> = LimitProductDataViewModel
 
 
-   fun incLimit(){
-      limitProductShowViewModel.value= limitProductShowViewModel.value?.plus(5);
+   suspend fun LimitGetData(LimitNo:Int): List<ResponseItem> {
 
 
-   }
-   fun LimitGetData() {
 
-      viewModelScope.launch {
-         val newProductData = limitProductShowViewModel.value?.let {
-            ApiserviceInst.GetAllProductDataWithLimit(
-               it
+            return ApiserviceInst.GetAllProductDataWithLimit(
+               LimitNo
             )
-         }
-         withContext(Dispatchers.Main){
-            LimitProductDataViewModel.value=newProductData
-         }
-      }
+
+
+
 
 
 
@@ -80,6 +77,16 @@ class viewModel @Inject constructor(
 
 
 
+   }
+   suspend fun getSpecificCatigoriesData(Cat_Name: String): List<ResponseItem> {
+      try {
+         return ApiserviceInst.GetSpecificCatigory(Cat_Name)
+      } catch (e: Exception) {
+         // Handle the exception here, for example, log it
+         Log.e("GetSpecificCatigoriesData", "Error: ${e.message}", e)
+         // Throw the exception or return empty list as per your requirement
+         throw e
+      }
    }
 
 

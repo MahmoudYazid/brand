@@ -42,16 +42,18 @@ import com.yazid.brand.view.navbar.navbar
 import com.yazid.brand.view.searchbar.SearchBarComp
 import com.yazid.brand.viewModel.viewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModelInst:viewModel by viewModels()
 
+
         viewModelInst.GetAllData()
         viewModelInst.GetCatigoriesData()
 
-        viewModelInst.LimitGetData()
 
         setContent {
             BrandTheme {
@@ -113,33 +115,7 @@ class MainActivity : ComponentActivity() {
                     item{
 
 
-                        OutlinedButton(
-                            onClick = {
-                                      viewModelInst.incLimit()
-                                        viewModelInst.LimitGetData()
 
-
-                            },
-                            modifier =
-                            Modifier
-                                .clip(RoundedCornerShape(20.dp))
-                                .border(
-                                    2.dp,
-                                    Color(0xFF0D6EFD),
-                                    shape = RoundedCornerShape(20.dp)
-                                ) // Set border color to black
-
-                                .width(150.dp)
-                                .height(40.dp)
-                                .background(Color(0xFF0D6EFD))
-
-                        ) {
-                            Text(
-                                text = " more",
-                                color = Color.White ,
-                                textAlign = TextAlign.Center
-                            )
-                        }
                     }
                     
                     

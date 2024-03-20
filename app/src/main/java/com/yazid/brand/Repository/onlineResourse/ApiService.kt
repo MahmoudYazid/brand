@@ -3,6 +3,7 @@ package com.yazid.brand.Repository.onlineResourse
 import com.yazid.brand.model.ResponseItem
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -15,5 +16,11 @@ interface ApiService {
     suspend fun getproductsWithLimit(
 
         @Query("limit") limit: Int
+    ): List<ResponseItem>
+
+
+    @GET("products/category/{category}")
+    suspend fun getSpecificCategories(
+        @Path("category") category: String
     ): List<ResponseItem>
 }

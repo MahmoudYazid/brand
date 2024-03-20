@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:allowBackup="true"
         android:name=".dependancyInjection.ApplicationDaggerHilt"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Brand"
         tools:targetApi="31">
+        <activity
+            android:name=".view.Details"
+            android:exported="false"
+            android:label="@string/title_activity_details"
+            android:theme="@style/Theme.Brand" />
+        <activity
+            android:name=".view.CategoryActivity"
+            android:exported="false"
+            android:label="@string/title_activity_category"
+            android:theme="@style/Theme.Brand" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true"

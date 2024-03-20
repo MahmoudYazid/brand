@@ -24,5 +24,9 @@ class apiServiceImplement()  {
         return data
 
     }
+    suspend fun GetSpecificCatigory(Category:String): List<ResponseItem> {
+        val data = ProductsApi.retrofitService.getSpecificCategories(Category)
+        return data
 
+    }
 }
