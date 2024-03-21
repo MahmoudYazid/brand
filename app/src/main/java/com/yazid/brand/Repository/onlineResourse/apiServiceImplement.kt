@@ -29,4 +29,11 @@ class apiServiceImplement()  {
         return data
 
     }
+
+
+    suspend fun GetSpecificId(Id:String): ResponseItem {
+        val data = ProductsApi.retrofitService.getSpecificId(Id)
+        return data
+
+    }
 }

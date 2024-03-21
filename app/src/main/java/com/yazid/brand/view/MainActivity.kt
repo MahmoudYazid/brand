@@ -112,12 +112,7 @@ class MainActivity : ComponentActivity() {
 
                         ProductsGrid(viewModelInst = viewModelInst)
                     }
-                    item{
 
-
-
-                    }
-                    
                     
                     item { 
                         Spacer(modifier = Modifier.height(10.dp))

@@ -1,6 +1,7 @@
 package com.yazid.brand.view.ProductsGrid
 
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -83,7 +84,7 @@ fun ProductsGrid(viewModelInst: viewModel) {
                         .background(Color.White)
                         .clickable {
                             val intent = Intent(context, Details::class.java)
-                            intent.putExtra("item", product.id)
+                            intent.putExtra("item", product.id.toString())
                             context.startActivity(intent)
                         }
                 ) {

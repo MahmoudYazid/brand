@@ -113,6 +113,10 @@ dependencies {
 
     implementation ("androidx.fragment:fragment-ktx:$fragment_version")
 
+    // rating lib
+    implementation ("io.github.a914-gowtham:compose-ratingbar:1.2.3")
+
+
 
 
 }

@@ -23,4 +23,9 @@ interface ApiService {
     suspend fun getSpecificCategories(
         @Path("category") category: String
     ): List<ResponseItem>
+
+    @GET("/products/{id}")
+    suspend fun getSpecificId(
+        @Path("id") id: String
+    ): ResponseItem
 }

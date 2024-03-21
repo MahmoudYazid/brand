@@ -1,5 +1,6 @@
 package com.yazid.brand.view.searchbar
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,15 +33,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.yazid.brand.R
+import com.yazid.brand.view.Details
+import com.yazid.brand.view.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
 fun SearchBarComp(){
+    var context = LocalContext.current
     Box (
         modifier =
         Modifier
@@ -73,7 +78,14 @@ fun SearchBarComp(){
                 },
 
                 leadingIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+
+                        val intent = Intent(context, SearchActivity::class.java)
+                        intent.putExtra("word",TempText.toString() )
+                        context.startActivity(intent)
+
+
+                    }) {
                         Icon(
                             imageVector = Icons.Outlined.Search,
                             contentDescription = null
