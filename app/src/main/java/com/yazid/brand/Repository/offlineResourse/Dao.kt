@@ -9,17 +9,16 @@ import com.yazid.brand.model.DBClassItem
 @Dao
 interface DbDao {
     @Query("SELECT * FROM DBClassItem")
-    fun getAll(): List<DBClassItem>
+    suspend fun getAll(): List<DBClassItem>
 
-//    @Query("SELECT * FROM DBClassItem")
-//    fun IncreaseItemNo(id: Int)
 
-//    @Query("SELECT * FROM DBClassItem")
-//    fun DecreaseItemNo(id: Int)
+
 
     @Insert
-    fun insert(item: DBClassItem)
+    suspend fun insert(item: DBClassItem)
 
     @Delete
-    fun delete(item: DBClassItem)
+    suspend fun delete(item: DBClassItem)
+
+
 }

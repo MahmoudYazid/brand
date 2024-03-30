@@ -1,10 +1,7 @@
 package com.yazid.brand.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.RatingBar
-import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -36,6 +33,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,19 +44,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
-import com.gowtham.ratingbar.RatingBarStyle
 import com.yazid.brand.R
+import com.yazid.brand.model.DBClassItem
 import com.yazid.brand.model.ResponseItem
 import com.yazid.brand.view.ScrollerTitle.ScrollerTitle
 import com.yazid.brand.view.similarScroller.similarScroller
 import com.yazid.brand.view.ui.theme.BrandTheme
 import com.yazid.brand.viewModel.viewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -70,8 +68,13 @@ class Details : ComponentActivity() {
         val viewModelInst:viewModel by viewModels();
         val id = intent.getStringExtra("item")
         setContent {
+            val coroutineScopeInst = rememberCoroutineScope()
+
             var ProductData by remember {
                 mutableStateOf<ResponseItem?>(null)
+            }
+            var ProductinCart by remember {
+                mutableStateOf<Int>(0)
             }
             val Rating: Float? = ProductData?.rating?.rate?.toString()?.toFloatOrNull()
 
@@ -235,7 +238,21 @@ class Details : ComponentActivity() {
                             ) {
                                 OutlinedButton(
                                     onClick = {
+                                        ProductinCart.plus(1)
+                                        coroutineScopeInst.launch {
+                                            viewModelInst.InsertProductInCart(DBClassItem(
 
+                                                image = ProductData?.image.toString(),
+                                                price = ProductData?.price.toString(),
+                                                description = ProductData?.description.toString(),
+                                                id = null,
+                                                title = ProductData?.title.toString(),
+                                                category = ProductData?.category.toString(),
+                                                rate = ProductData?.rating?.rate.toString(),
+                                                count = ProductData?.rating?.count.toString(),
+                                                productId = ProductData?.id.toString()
+                                            ))
+                                        }
 
                                     },
                                     modifier =

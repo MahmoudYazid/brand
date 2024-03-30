@@ -1,7 +1,6 @@
 package com.yazid.brand.viewModel
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,19 +8,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yazid.brand.Repository.offlineResourse.RoomImplementationClass
 import com.yazid.brand.Repository.onlineResourse.apiServiceImplement
+import com.yazid.brand.model.DBClassItem
 import com.yazid.brand.model.ResponseItem
-import com.yazid.brand.view.CategoryActivity
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @HiltViewModel
 class viewModel @Inject constructor(
@@ -103,14 +98,37 @@ class viewModel @Inject constructor(
       try {
          return ApiserviceInst.GetSpecificId(Id)
       } catch (e: Exception) {
-         // Handle the exception here, for example, log it
          Log.e("GetSpecificCatigoriesData", "Error: ${e.message}", e)
-         // Throw the exception or return empty list as per your requirement
          throw e
       }
    }
 
 
    // For Room Control Functions
+   suspend fun getProductsFromCart(): List<DBClassItem> {
+      return RoomImpl.Dao.ControlerDao().getAll()
+   }
+   suspend fun DeleteProductFromCart(Item: DBClassItem){
+      return RoomImpl.Dao.ControlerDao().delete(Item)
+   }
+
+   suspend fun InsertProductInCart(Item: DBClassItem){
+      return RoomImpl.Dao.ControlerDao().insert(Item)
+
+   }
+
+   // operations
+   fun sumOfItems(data:List<DBClassItem>): Float {
+      var price= 0.0F
+      for( item in data){
+         price = price + item.price.toFloat()
+      }
+      return price
+
+   }
+   fun TotalOfItem(Total: Float): Float {
+      return Total+14
+   }
+
 
 }

@@ -99,7 +99,7 @@ class SearchActivity : ComponentActivity() {
                     },
 
                     ) {it
-
+                    val context = LocalContext.current
                     LazyColumn(
                         modifier =
                         Modifier
@@ -123,7 +123,7 @@ class SearchActivity : ComponentActivity() {
                                             .padding(5.dp)
                                             .background(Color.White)
                                             .clickable {
-                                                val intent = Intent(this@SearchActivity, Details::class.java)
+                                                val intent = Intent(context, Details::class.java)
                                                 intent.putExtra("item",product.id.toString())
                                                 startActivity(intent)
                                             }

@@ -1,7 +1,10 @@
 package com.yazid.brand.view.navbar
 
+import android.content.Intent
 import android.graphics.drawable.PaintDrawable
+import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -16,12 +19,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.yazid.brand.R
+import com.yazid.brand.view.ShoppingCart
 
 @Composable
 fun navbar(){
+    val context = LocalContext.current
     Box (
         modifier =
         Modifier
@@ -58,6 +64,13 @@ fun navbar(){
                     modifier =
                     Modifier
                         .size(40.dp)
+                        .clickable {
+                            context.startActivity(Intent(
+                                Intent.ACTION_VIEW
+                                ,Uri.parse("https://www.linkedin.com/in/mahmoudyazid/")
+
+                            ))
+                        }
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 Image(
@@ -66,6 +79,13 @@ fun navbar(){
                     modifier =
                     Modifier
                         .size(30.dp)
+                        .clickable {
+                            context.startActivity(Intent(
+                                context
+                                ,ShoppingCart::class.java
+
+                            ))
+                        }
                 )
             }
         }

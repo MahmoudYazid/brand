@@ -86,6 +86,8 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
+    // room issue
+    implementation("androidx.room:room-ktx:$room_version")
 
     // Gson problem
     implementation("com.google.code.gson:gson:2.8.8")
@@ -115,6 +117,7 @@ dependencies {
 
     // rating lib
     implementation ("io.github.a914-gowtham:compose-ratingbar:1.2.3")
+
 
 
 

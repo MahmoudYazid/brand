@@ -117,7 +117,7 @@ class CategoryActivity : ComponentActivity() {
                                                 .background(Color.White)
                                                 .clickable {
                                                     val intent = Intent(context, Details::class.java)
-                                                     intent.putExtra("item",product.id)
+                                                     intent.putExtra("item",product.id.toString())
                                                     startActivity(intent)
                                                 }
                                         ) {

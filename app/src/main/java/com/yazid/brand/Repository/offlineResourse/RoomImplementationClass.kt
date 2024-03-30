@@ -7,27 +7,22 @@ import com.yazid.brand.model.DBClassItem
 import javax.inject.Inject
 
 class RoomImplementationClass @Inject constructor(val Dao: AppDatabase) {
-    fun getAll(): List<DBClassItem>{
+    suspend fun getAll(): List<DBClassItem>{
         return  Dao.ControlerDao().getAll()
     }
 
-//    fun IncreaseItemNo(Id: Int){
-//
-//        return  Dao.ControlerDao().IncreaseItemNo(Id)
-//    }
 
-//    fun DecreaseItemNo(Id: Int){
-//        return  Dao.ControlerDao().DecreaseItemNo(Id)
-//    }
 
-    fun insert(item: DBClassItem){
+
+    suspend fun insert(item: DBClassItem){
 
         return Dao.ControlerDao().insert(item)
     }
 
-    fun delete(item: DBClassItem){
+    suspend fun delete(item: DBClassItem){
         return Dao.ControlerDao().delete(item)
     }
+
 
 
 
