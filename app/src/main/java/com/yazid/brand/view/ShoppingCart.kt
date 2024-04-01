@@ -1,6 +1,7 @@
 package com.yazid.brand.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -43,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -280,6 +282,7 @@ fun ThreeDots(viewModelInst: viewModel , item: DBClassItem, RefreshData: () -> U
 
 @Composable
 fun TotalPaymentBox(CartData:List<DBClassItem>?, sum: Float, total: Float){
+    val context_ = LocalContext.current
     Box(
         modifier =
         Modifier
@@ -440,7 +443,12 @@ fun TotalPaymentBox(CartData:List<DBClassItem>?, sum: Float, total: Float){
 
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+
+                        Toast.makeText(context_,"We do not have payment method yet", Toast.LENGTH_LONG).show()
+
+
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00B517)) ,
                     modifier = Modifier.fillMaxSize()
 

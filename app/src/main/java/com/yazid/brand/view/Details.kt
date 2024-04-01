@@ -2,12 +2,14 @@ package com.yazid.brand.view
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -40,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -67,9 +70,10 @@ class Details : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val viewModelInst:viewModel by viewModels();
         val id = intent.getStringExtra("item")
+
         setContent {
             val coroutineScopeInst = rememberCoroutineScope()
-
+            val context_ = LocalContext.current
             var ProductData by remember {
                 mutableStateOf<ResponseItem?>(null)
             }
@@ -158,6 +162,9 @@ class Details : ComponentActivity() {
                                 Image(painter = painterResource(id = R.drawable.message) ,
                                     contentDescription =null,
                                     modifier =  Modifier
+                                        .clickable {
+                                            Toast.makeText(context_,"the comments not available",Toast.LENGTH_LONG).show()
+                                        }
 
                                         .size(30.dp),
                                     colorFilter = ColorFilter.tint(Color(0xFFDBDBDB))
@@ -169,7 +176,13 @@ class Details : ComponentActivity() {
                                         color = Color(0xFF787A80),
                                         fontSize = 20.sp
 
-                                    )
+                                    ),
+                                    modifier =
+                                        Modifier
+                                            .clickable {
+                                                Toast.makeText(context_,"the comments not available",Toast.LENGTH_LONG).show()
+
+                                            }
                                 )
 
                             }

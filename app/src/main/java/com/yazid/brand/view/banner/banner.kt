@@ -2,6 +2,7 @@ package com.yazid.brand.view.banner
 
 import android.graphics.drawable.PaintDrawable
 import android.widget.Button
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +43,7 @@ fun bannerCompose(
     FirstText:String,
     SecondText:String
     ){
+    val context_ = LocalContext.current
     Box(
         modifier =
         Modifier
@@ -80,7 +83,11 @@ fun bannerCompose(
             )
             Spacer(modifier = Modifier.height(20.dp))
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+
+                          Toast.makeText(context_,"There is no products yet",Toast.LENGTH_LONG).show()
+
+                },
                 modifier =
                 Modifier
                     .clip(RoundedCornerShape(20.dp))
